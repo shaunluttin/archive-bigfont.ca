@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from bigfontblog.azurewebsites.net/humble-notes-after-five-weeks-migrating-an-existing-domain-driven-design-to-cqrs-es/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 09 Dec 2022 10:56:12 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <title>Humble notes after five weeks migrating an existing domain driven design to CQRS/ES</title>
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" type="text/css" href="../assets/built/screenc03d.css?v=3e32194df1" />
+
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon" />
+    <link rel="canonical" href="https://bigfont.ca/humble-notes-after-five-weeks-migrating-an-existing-domain-driven-design-to-cqrs-es/" />
+    <meta name="referrer" content="no-referrer-when-downgrade" />
+    <link rel="amphtml" href="https://bigfont.ca/humble-notes-after-five-weeks-migrating-an-existing-domain-driven-design-to-cqrs-es/amp/" />
+    
+    <meta property="og:site_name" content="BigFont Blog" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Humble notes after five weeks migrating an existing domain driven design to CQRS/ES" />
+    <meta property="og:description" content="DRAFT... time-spent (45-min)
+
+This blog post is a work in progress. If anything doesn&#x27;t seem quite right,
+please Tweet to me at https://twitter.com/shaunluttin.The intended audience for
+this post is software developers that are familiar with CQRS/ES and want a story
+about someone who has been using it for five weeks.
+
+Directory Structure 
+domain/
+  models/
+  commands/
+  events/
+  snapshotUpdateServices/
+repositories/
+  commands/
+  queries/
+infrastructure/
+  Command.ts
+  Event.ts
+  EventStoreServ" />
+    <meta property="og:url" content="https://bigfont.ca/humble-notes-after-five-weeks-migrating-an-existing-domain-driven-design-to-cqrs-es/" />
+    <meta property="article:published_time" content="2019-04-15T22:05:11.000Z" />
+    <meta property="article:modified_time" content="2019-04-17T00:20:24.000Z" />
+    <meta property="article:tag" content="cqrs" />
+    <meta property="article:tag" content="event-store" />
+    
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Humble notes after five weeks migrating an existing domain driven design to CQRS/ES" />
+    <meta name="twitter:description" content="DRAFT... time-spent (45-min)
+
+This blog post is a work in progress. If anything doesn&#x27;t seem quite right,
+please Tweet to me at https://twitter.com/shaunluttin.The intended audience for
+this post is software developers that are familiar with CQRS/ES and want a story
+about someone who has been using it for five weeks.
+
+Directory Structure 
+domain/
+  models/
+  commands/
+  events/
+  snapshotUpdateServices/
+repositories/
+  commands/
+  queries/
+infrastructure/
+  Command.ts
+  Event.ts
+  EventStoreServ" />
+    <meta name="twitter:url" content="https://bigfont.ca/humble-notes-after-five-weeks-migrating-an-existing-domain-driven-design-to-cqrs-es/" />
+    <meta name="twitter:label1" content="Written by" />
+    <meta name="twitter:data1" content="Shaun Luttin" />
+    <meta name="twitter:label2" content="Filed under" />
+    <meta name="twitter:data2" content="cqrs, event-store" />
+    
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name": "BigFont Blog",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://bigfont.ca/content/images/2016/10/business_casual_cropped_square.jpg",
+            "width": 60,
+            "height": 60
+        }
+    },
+    "author": {
+        "@type": "Person",
+        "name": "Shaun Luttin",
+        "image": {
+            "@type": "ImageObject",
+            "url": "//www.gravatar.com/avatar/a5f32a0e420e00997e87ee2e565a30bd?s=250&d=mm&r=x",
+            "width": 250,
+            "height": 250
+        },
+        "url": "https://bigfont.ca/author/shaun/",
+        "sameAs": []
+    },
+    "headline": "Humble notes after five weeks migrating an existing domain driven design to CQRS/ES",
+    "url": "https://bigfont.ca/humble-notes-after-five-weeks-migrating-an-existing-domain-driven-design-to-cqrs-es/",
+    "datePublished": "2019-04-15T22:05:11.000Z",
+    "dateModified": "2019-04-17T00:20:24.000Z",
+    "keywords": "cqrs, event-store",
+    "description": "DRAFT... time-spent (45-min)\n\nThis blog post is a work in progress. If anything doesn&#x27;t seem quite right,\nplease Tweet to me at https://twitter.com/shaunluttin.The intended audience for\nthis post is software developers that are familiar with CQRS/ES and want a story\nabout someone who has been using it for five weeks.\n\nDirectory Structure \ndomain/\n  models/\n  commands/\n  events/\n  snapshotUpdateServices/\nrepositories/\n  commands/\n  queries/\ninfrastructure/\n  Command.ts\n  Event.ts\n  EventStoreServ",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://bigfont.ca/"
+    }
+}
+    </script>
+
+    <script src="../public/ghost-sdk.minc03d.js?v=3e32194df1"></script>
+<script>
+ghost.init({
+	clientId: "ghost-frontend",
+	clientSecret: "d312fafda9a4"
+});
+</script>
+    <meta name="generator" content="Ghost 2.30" />
+    <link rel="alternate" type="application/rss+xml" title="BigFont Blog" href="https://bigfont.ca/rss/" />
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-85719272-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+<style>
+    .img-attribution {
+      font-size:12px;
+    }
+    
+    table.pros-and-cons {
+      table-layout:'fixed';
+    }
+    
+    table.pros-and-cons colgroup col {
+      width:40%;
+    }
+
+    table.pros-and-cons colgroup col:first-of-type {
+      width:20%;
+    }
+
+    table.pros-and-cons th,
+    table.pros-and-cons p {
+      white-space:break-spaces;
+    }
+</style>
+
+</head>
+<body class="post-template tag-cqrs tag-event-store">
+
+    <div class="site-wrapper">
+
+        
+
+<header class="site-header outer">
+    <div class="inner">
+        <nav class="site-nav">
+    <div class="site-nav-left">
+                <a class="site-nav-logo" href="https://bigfont.ca/"><img src="../content/images/2016/10/business_casual_cropped_square.jpg" alt="BigFont Blog" /></a>
+            <ul class="nav" role="menu">
+    <li class="nav-home" role="menuitem"><a href="../index.html">Home</a></li>
+    <li class="nav-about" role="menuitem"><a href="../about/index.html">About</a></li>
+    <li class="nav-bibliography-work" role="menuitem"><a href="../work-bibliography/index.html">Bibliography (Work)</a></li>
+</ul>
+
+    </div>
+    <div class="site-nav-right">
+        <div class="social-links">
+        </div>
+            <a class="rss-button" href="https://feedly.com/i/subscription/feed/https://bigfont.ca/rss/" title="RSS" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="6.18" cy="17.82" r="2.18"/><path d="M4 4.44v2.83c7.03 0 12.73 5.7 12.73 12.73h2.83c0-8.59-6.97-15.56-15.56-15.56zm0 5.66v2.83c3.9 0 7.07 3.17 7.07 7.07h2.83c0-5.47-4.43-9.9-9.9-9.9z"/></svg>
+</a>
+    </div>
+</nav>
+    </div>
+</header>
+
+
+<main id="site-main" class="site-main outer">
+    <div class="inner">
+
+        <article class="post-full post tag-cqrs tag-event-store no-image">
+
+            <header class="post-full-header">
+                <section class="post-full-meta">
+                    <time class="post-full-meta-date" datetime="2019-04-15">15 April 2019</time>
+                        <span class="date-divider">/</span> <a href="../tag/cqrs/index.html">cqrs</a>
+                </section>
+                <h1 class="post-full-title">Humble notes after five weeks migrating an existing domain driven design to CQRS/ES</h1>
+            </header>
+
+
+            <section class="post-full-content">
+                <div class="post-content">
+                    <blockquote>DRAFT... time-spent (45-min)<br><br>This blog post is a work in progress. If anything doesn't seem quite right, please Tweet to me at <a href="https://twitter.com/shaunluttin">https://twitter.com/shaunluttin</a>.</blockquote><p>The intended audience for this post is software developers that are familiar with CQRS/ES and want a story about someone who has been using it for five weeks.</p><h2 id="directory-structure">Directory Structure </h2><pre><code>domain/
+  models/
+  commands/
+  events/
+  snapshotUpdateServices/
+repositories/
+  commands/
+  queries/
+infrastructure/
+  Command.ts
+  Event.ts
+  EventStoreService.ts
+  CommandHandler.ts                                                                           </code></pre><p>Before introducing CQRS/ES, the existing system was following Domain Driven Design. The <code>models/</code> directory contained Domain Models and the <code>repositories/</code> directory contained interfaces for populating those models from some data store.</p><p>Adding CQRS/ES involved introducing the additional directories and also split <code>repositories/</code> into <code>command/</code> and <code>queries/</code>. </p><ul><li>The <code>infrastructure/</code> directory contains domain-agnostic CQRS/ES machinery.</li><li>The remaining directories contain domain-specific stuff such as the command/event pair <code>CreateNewInvoice</code> and <code>NewInvoiceCreated</code>.</li><li>The <code>snapshotUpdateServices/</code> directory is somewhat unconventional and is responsible for updating the domain models when relevant events occur. It's a (temporary) concession that allows the system to continue running its queries against the domain model.</li></ul><h1 id="separation-of-command-query-responsibilities">Separation of Command/Query Responsibilities</h1><p>In the canonical pattern, domain commands produce domain event models, which the system writes to the event store, and queries run against view models that materialize from the event store. That means that the "write model" consists of domain event models, the "read model"  consists of view models, and that both use the event store are their source of truth.</p><p>The <code>snapshotUpdateServices/</code> exists because our existing system was already performing reads and writes against the domain model. Instead of moving away from that entirely, we changed our write model to domain events, which follows the canonical pattern, and introduced the <code>snapshotUpdateServices/</code>, which listens to events as they occur and makes appropriate updates to the domain models. This is similar to the Materialized View pattern, with the difference that the <code>snapshotUpdateServices/</code> update domain models instead of updating view-specific ones. This approach allowed us to keep our existing read system intact while migrating to CQRS/ES.</p>
+                </div>
+            </section>
+
+
+            <footer class="post-full-footer">
+
+
+                    
+<section class="author-card">
+        <img class="author-profile-image" src="http://www.gravatar.com/avatar/a5f32a0e420e00997e87ee2e565a30bd?s=250&amp;d=mm&amp;r=x" alt="Shaun Luttin" />
+    <section class="author-card-content">
+        <h4 class="author-card-name"><a href="../author/shaun/index.html">Shaun Luttin</a></h4>
+            <p>Read <a href="../author/shaun/index.html">more posts</a> by this author.</p>
+    </section>
+</section>
+<div class="post-full-footer-right">
+    <a class="author-card-button" href="../author/shaun/index.html">Read More</a>
+</div>
+
+
+            </footer>
+
+
+        </article>
+
+    </div>
+</main>
+
+<aside class="read-next outer">
+    <div class="inner">
+        <div class="read-next-feed">
+                <article class="read-next-card"
+
+                >
+                    <header class="read-next-card-header">
+                        <small class="read-next-card-header-sitetitle">&mdash; BigFont Blog &mdash;</small>
+                        <h3 class="read-next-card-header-title"><a href="../tag/cqrs/index.html">cqrs</a></h3>
+                    </header>
+                    <div class="read-next-divider"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 14.5s2 3 5 3 5.5-2.463 5.5-5.5S21 6.5 18 6.5c-5 0-7 11-12 11C2.962 17.5.5 15.037.5 12S3 6.5 6 6.5s4.5 3.5 4.5 3.5"/></svg>
+</div>
+                    <div class="read-next-card-content">
+                        <ul>
+                            <li><a href="../cqrs-and-ddd-some-guidelines/index.html">CQRS/ES and DDD: Some Frequently Asked Questions</a></li>
+                        </ul>
+                    </div>
+                    <footer class="read-next-card-footer">
+                        <a href="../tag/cqrs/index.html">1 post →</a>
+                    </footer>
+                </article>
+
+                <article class="post-card post no-image">
+
+
+    <div class="post-card-content">
+
+        <a class="post-card-content-link" href="../git-config-core-autocrlf/index.html">
+
+            <header class="post-card-header">
+                <h2 class="post-card-title">git config core.autocrlf</h2>
+            </header>
+
+            <section class="post-card-excerpt">
+                <p>Windows ends lines with carriage-return and linefeed CRLF. Mac and Linux use only a linefeed LF. Enter git config core.autocrlf to the rescue! View it git config --get core.autocrlf  Set it</p>
+            </section>
+
+        </a>
+
+        <footer class="post-card-meta">
+
+            <ul class="author-list">
+                <li class="author-list-item">
+
+                    <div class="author-name-tooltip">
+                        Shaun Luttin
+                    </div>
+
+                        <a href="../author/shaun/index.html" class="static-avatar">
+                            <img class="author-profile-image" src="http://www.gravatar.com/avatar/a5f32a0e420e00997e87ee2e565a30bd?s=250&amp;d=mm&amp;r=x" alt="Shaun Luttin" />
+                        </a>
+                </li>
+            </ul>
+
+            <span class="reading-time">1 min read</span>
+
+        </footer>
+
+    </div>
+
+</article>
+
+                <article class="post-card post tag-domains tag-proton-mail tag-google-apps-2 tag-google-suite tag-good-bye-google no-image">
+
+
+    <div class="post-card-content">
+
+        <a class="post-card-content-link" href="../keep-my-free-google-apps-with-a-custom-domain-while-using-the-same-domain-with-proton-mail/index.html">
+
+            <header class="post-card-header">
+                    <span class="post-card-tags">domains</span>
+                <h2 class="post-card-title">Keep my free Google Apps with a custom domain while using the same domain with Proton Mail</h2>
+            </header>
+
+            <section class="post-card-excerpt">
+                <p>Goal: maintain free Google Apps and move shaunluttin.com email to Proton Mail.  Proton Mail Steps: Log in at protonmail.com  Click Settings | Domains | Add AddressFollow the required set up steps.Those steps</p>
+            </section>
+
+        </a>
+
+        <footer class="post-card-meta">
+
+            <ul class="author-list">
+                <li class="author-list-item">
+
+                    <div class="author-name-tooltip">
+                        Shaun Luttin
+                    </div>
+
+                        <a href="../author/shaun/index.html" class="static-avatar">
+                            <img class="author-profile-image" src="http://www.gravatar.com/avatar/a5f32a0e420e00997e87ee2e565a30bd?s=250&amp;d=mm&amp;r=x" alt="Shaun Luttin" />
+                        </a>
+                </li>
+            </ul>
+
+            <span class="reading-time">1 min read</span>
+
+        </footer>
+
+    </div>
+
+</article>
+
+        </div>
+    </div>
+</aside>
+
+<div class="floating-header">
+    <div class="floating-header-logo">
+        <a href="https://bigfont.ca/">
+            <span>BigFont Blog</span>
+        </a>
+    </div>
+    <span class="floating-header-divider">&mdash;</span>
+    <div class="floating-header-title">Humble notes after five weeks migrating an existing domain driven design to CQRS/ES</div>
+    <div class="floating-header-share">
+        <div class="floating-header-share-label">Share this <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M7.5 15.5V4a1.5 1.5 0 1 1 3 0v4.5h2a1 1 0 0 1 1 1h2a1 1 0 0 1 1 1H18a1.5 1.5 0 0 1 1.5 1.5v3.099c0 .929-.13 1.854-.385 2.748L17.5 23.5h-9c-1.5-2-5.417-8.673-5.417-8.673a1.2 1.2 0 0 1 1.76-1.605L7.5 15.5zm6-6v2m-3-3.5v3.5m6-1v2"/>
+</svg>
+</div>
+        <a class="floating-header-share-tw" href="https://twitter.com/share?text=Humble%20notes%20after%20five%20weeks%20migrating%20an%20existing%20domain%20driven%20design%20to%20CQRS%2FES&amp;url=https://bigfont.ca/humble-notes-after-five-weeks-migrating-an-existing-domain-driven-design-to-cqrs-es/"
+            onclick="window.open(this.href, 'share-twitter', 'width=550,height=235');return false;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M30.063 7.313c-.813 1.125-1.75 2.125-2.875 2.938v.75c0 1.563-.188 3.125-.688 4.625a15.088 15.088 0 0 1-2.063 4.438c-.875 1.438-2 2.688-3.25 3.813a15.015 15.015 0 0 1-4.625 2.563c-1.813.688-3.75 1-5.75 1-3.25 0-6.188-.875-8.875-2.625.438.063.875.125 1.375.125 2.688 0 5.063-.875 7.188-2.5-1.25 0-2.375-.375-3.375-1.125s-1.688-1.688-2.063-2.875c.438.063.813.125 1.125.125.5 0 1-.063 1.5-.25-1.313-.25-2.438-.938-3.313-1.938a5.673 5.673 0 0 1-1.313-3.688v-.063c.813.438 1.688.688 2.625.688a5.228 5.228 0 0 1-1.875-2c-.5-.875-.688-1.813-.688-2.75 0-1.063.25-2.063.75-2.938 1.438 1.75 3.188 3.188 5.25 4.25s4.313 1.688 6.688 1.813a5.579 5.579 0 0 1 1.5-5.438c1.125-1.125 2.5-1.688 4.125-1.688s3.063.625 4.188 1.813a11.48 11.48 0 0 0 3.688-1.375c-.438 1.375-1.313 2.438-2.563 3.188 1.125-.125 2.188-.438 3.313-.875z"/></svg>
+        </a>
+        <a class="floating-header-share-fb" href="https://www.facebook.com/sharer/sharer.php?u=https://bigfont.ca/humble-notes-after-five-weeks-migrating-an-existing-domain-driven-design-to-cqrs-es/"
+            onclick="window.open(this.href, 'share-facebook','width=580,height=296');return false;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M19 6h5V0h-5c-3.86 0-7 3.14-7 7v3H8v6h4v16h6V16h5l1-6h-6V7c0-.542.458-1 1-1z"/></svg>
+        </a>
+    </div>
+    <progress id="reading-progress" class="progress" value="0">
+        <div class="progress-container">
+            <span class="progress-bar"></span>
+        </div>
+    </progress>
+</div>
+
+
+
+
+        <footer class="site-footer outer">
+            <div class="site-footer-content inner">
+                <section class="copyright"><a href="https://bigfont.ca/">BigFont Blog</a> &copy; 2022</section>
+                <nav class="site-footer-nav">
+                    <a href="https://bigfont.ca/">Latest Posts</a>
+                    
+                    
+                    <a href="https://ghost.org/" target="_blank" rel="noopener">Ghost</a>
+                </nav>
+            </div>
+        </footer>
+
+    </div>
+
+
+    <script>
+        var images = document.querySelectorAll('.kg-gallery-image img');
+        images.forEach(function (image) {
+            var container = image.closest('.kg-gallery-image');
+            var width = image.attributes.width.value;
+            var height = image.attributes.height.value;
+            var ratio = width / height;
+            container.style.flex = ratio + ' 1 0%';
+        })
+    </script>
+
+
+    <script
+        src="https://code.jquery.com/jquery-3.2.1.min.js"
+        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous">
+    </script>
+    <script type="text/javascript" src="../assets/built/jquery.fitvidsc03d.js?v=3e32194df1"></script>
+
+    <script src="../assets/built/infinitescrollc03d.js?v=3e32194df1"></script>
+
+    <script>
+
+// NOTE: Scroll performance is poor in Safari
+// - this appears to be due to the events firing much more slowly in Safari.
+//   Dropping the scroll event and using only a raf loop results in smoother
+//   scrolling but continuous processing even when not scrolling
+$(document).ready(function () {
+    // Start fitVids
+    var $postContent = $(".post-full-content");
+    $postContent.fitVids();
+    // End fitVids
+
+    var progressBar = document.querySelector('#reading-progress');
+    var header = document.querySelector('.floating-header');
+    var title = document.querySelector('.post-full-title');
+
+    var lastScrollY = window.scrollY;
+    var lastWindowHeight = window.innerHeight;
+    var lastDocumentHeight = $(document).height();
+    var ticking = false;
+
+    function onScroll() {
+        lastScrollY = window.scrollY;
+        requestTick();
+    }
+
+    function onResize() {
+        lastWindowHeight = window.innerHeight;
+        lastDocumentHeight = $(document).height();
+        requestTick();
+    }
+
+    function requestTick() {
+        if (!ticking) {
+            requestAnimationFrame(update);
+        }
+        ticking = true;
+    }
+
+    function update() {
+        var trigger = title.getBoundingClientRect().top + window.scrollY;
+        var triggerOffset = title.offsetHeight + 35;
+        var progressMax = lastDocumentHeight - lastWindowHeight;
+
+        // show/hide floating header
+        if (lastScrollY >= trigger + triggerOffset) {
+            header.classList.add('floating-active');
+        } else {
+            header.classList.remove('floating-active');
+        }
+
+        progressBar.setAttribute('max', progressMax);
+        progressBar.setAttribute('value', lastScrollY);
+
+        ticking = false;
+    }
+
+    window.addEventListener('scroll', onScroll, {passive: true});
+    window.addEventListener('resize', onResize, false);
+
+    update();
+
+});
+</script>
+
+
+    
+
+</body>
+
+<!-- Mirrored from bigfontblog.azurewebsites.net/humble-notes-after-five-weeks-migrating-an-existing-domain-driven-design-to-cqrs-es/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 09 Dec 2022 10:56:12 GMT -->
+</html>

@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from bigfontblog.azurewebsites.net/windows-10-setup-first-steps/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 09 Dec 2022 10:53:33 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <title>Windows 10 Setup First Steps</title>
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" type="text/css" href="../assets/built/screenc03d.css?v=3e32194df1" />
+
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon" />
+    <link rel="canonical" href="https://bigfont.ca/windows-10-setup-first-steps/" />
+    <meta name="referrer" content="no-referrer-when-downgrade" />
+    <link rel="amphtml" href="https://bigfont.ca/windows-10-setup-first-steps/amp/" />
+    
+    <meta property="og:site_name" content="BigFont Blog" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Windows 10 Setup First Steps" />
+    <meta property="og:description" content="Set up a conservative Windows Update cadence and useful restore points.
+
+High Level Steps
+ 1. Set up deferred Windows updates.
+ 2. Create a restore point.
+ 3. Run a memory diagnostic.
+ 4. Install essential software.
+ 5. Create another restore point.
+ 6. Set up developer environment.
+ 7. Create yet another restore point.
+
+1. Deferred Windows Updates
+&gt; This option is no longer available as of the Oct 2020 update (version 20H2).
+
+
+Settings &gt; Update &amp; Security &gt; Windows Update &gt; Advanced Options (av" />
+    <meta property="og:url" content="https://bigfont.ca/windows-10-setup-first-steps/" />
+    <meta property="article:published_time" content="2018-01-21T21:25:09.000Z" />
+    <meta property="article:modified_time" content="2021-03-29T16:41:44.000Z" />
+    <meta property="article:tag" content="windows-10" />
+    <meta property="article:tag" content="windows" />
+    
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Windows 10 Setup First Steps" />
+    <meta name="twitter:description" content="Set up a conservative Windows Update cadence and useful restore points.
+
+High Level Steps
+ 1. Set up deferred Windows updates.
+ 2. Create a restore point.
+ 3. Run a memory diagnostic.
+ 4. Install essential software.
+ 5. Create another restore point.
+ 6. Set up developer environment.
+ 7. Create yet another restore point.
+
+1. Deferred Windows Updates
+&gt; This option is no longer available as of the Oct 2020 update (version 20H2).
+
+
+Settings &gt; Update &amp; Security &gt; Windows Update &gt; Advanced Options (av" />
+    <meta name="twitter:url" content="https://bigfont.ca/windows-10-setup-first-steps/" />
+    <meta name="twitter:label1" content="Written by" />
+    <meta name="twitter:data1" content="Shaun Luttin" />
+    <meta name="twitter:label2" content="Filed under" />
+    <meta name="twitter:data2" content="windows-10, windows" />
+    
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name": "BigFont Blog",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://bigfont.ca/content/images/2016/10/business_casual_cropped_square.jpg",
+            "width": 60,
+            "height": 60
+        }
+    },
+    "author": {
+        "@type": "Person",
+        "name": "Shaun Luttin",
+        "image": {
+            "@type": "ImageObject",
+            "url": "//www.gravatar.com/avatar/a5f32a0e420e00997e87ee2e565a30bd?s=250&d=mm&r=x",
+            "width": 250,
+            "height": 250
+        },
+        "url": "https://bigfont.ca/author/shaun/",
+        "sameAs": []
+    },
+    "headline": "Windows 10 Setup First Steps",
+    "url": "https://bigfont.ca/windows-10-setup-first-steps/",
+    "datePublished": "2018-01-21T21:25:09.000Z",
+    "dateModified": "2021-03-29T16:41:44.000Z",
+    "keywords": "windows-10, windows",
+    "description": "Set up a conservative Windows Update cadence and useful restore points.\n\nHigh Level Steps\n 1. Set up deferred Windows updates.\n 2. Create a restore point.\n 3. Run a memory diagnostic.\n 4. Install essential software.\n 5. Create another restore point.\n 6. Set up developer environment.\n 7. Create yet another restore point.\n\n1. Deferred Windows Updates\n&gt; This option is no longer available as of the Oct 2020 update (version 20H2).\n\n\nSettings &gt; Update &amp; Security &gt; Windows Update &gt; Advanced Options (av",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://bigfont.ca/"
+    }
+}
+    </script>
+
+    <script src="../public/ghost-sdk.minc03d.js?v=3e32194df1"></script>
+<script>
+ghost.init({
+	clientId: "ghost-frontend",
+	clientSecret: "d312fafda9a4"
+});
+</script>
+    <meta name="generator" content="Ghost 2.30" />
+    <link rel="alternate" type="application/rss+xml" title="BigFont Blog" href="https://bigfont.ca/rss/" />
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-85719272-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+<style>
+    .img-attribution {
+      font-size:12px;
+    }
+    
+    table.pros-and-cons {
+      table-layout:'fixed';
+    }
+    
+    table.pros-and-cons colgroup col {
+      width:40%;
+    }
+
+    table.pros-and-cons colgroup col:first-of-type {
+      width:20%;
+    }
+
+    table.pros-and-cons th,
+    table.pros-and-cons p {
+      white-space:break-spaces;
+    }
+</style>
+
+</head>
+<body class="post-template tag-windows-10 tag-windows">
+
+    <div class="site-wrapper">
+
+        
+
+<header class="site-header outer">
+    <div class="inner">
+        <nav class="site-nav">
+    <div class="site-nav-left">
+                <a class="site-nav-logo" href="https://bigfont.ca/"><img src="../content/images/2016/10/business_casual_cropped_square.jpg" alt="BigFont Blog" /></a>
+            <ul class="nav" role="menu">
+    <li class="nav-home" role="menuitem"><a href="../index.html">Home</a></li>
+    <li class="nav-about" role="menuitem"><a href="../about/index.html">About</a></li>
+    <li class="nav-bibliography-work" role="menuitem"><a href="../work-bibliography/index.html">Bibliography (Work)</a></li>
+</ul>
+
+    </div>
+    <div class="site-nav-right">
+        <div class="social-links">
+        </div>
+            <a class="rss-button" href="https://feedly.com/i/subscription/feed/https://bigfont.ca/rss/" title="RSS" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="6.18" cy="17.82" r="2.18"/><path d="M4 4.44v2.83c7.03 0 12.73 5.7 12.73 12.73h2.83c0-8.59-6.97-15.56-15.56-15.56zm0 5.66v2.83c3.9 0 7.07 3.17 7.07 7.07h2.83c0-5.47-4.43-9.9-9.9-9.9z"/></svg>
+</a>
+    </div>
+</nav>
+    </div>
+</header>
+
+
+<main id="site-main" class="site-main outer">
+    <div class="inner">
+
+        <article class="post-full post tag-windows-10 tag-windows no-image">
+
+            <header class="post-full-header">
+                <section class="post-full-meta">
+                    <time class="post-full-meta-date" datetime="2018-01-21">21 January 2018</time>
+                        <span class="date-divider">/</span> <a href="../tag/windows-10/index.html">windows-10</a>
+                </section>
+                <h1 class="post-full-title">Windows 10 Setup First Steps</h1>
+            </header>
+
+
+            <section class="post-full-content">
+                <div class="post-content">
+                    <!--kg-card-begin: markdown--><!--kg-card-begin: markdown--><p>Set up a conservative Windows Update cadence and useful restore points.</p>
+<h2 id="highlevelsteps">High Level Steps</h2>
+<ol>
+<li>Set up deferred Windows updates.</li>
+<li>Create a restore point.</li>
+<li>Run a memory diagnostic.</li>
+<li>Install essential software.</li>
+<li>Create another restore point.</li>
+<li>Set up developer environment.</li>
+<li>Create yet another restore point.</li>
+</ol>
+<h2 id="1deferredwindowsupdates">1. Deferred Windows Updates</h2>
+<blockquote>
+<p>This option is no longer available as of the Oct 2020 update (version 20H2).</p>
+</blockquote>
+<p>Settings &gt; Update &amp; Security &gt; Windows Update &gt; Advanced Options (available in Windows 10 Professional)</p>
+<ul>
+<li>Channel: Semi-Annual</li>
+<li>Feature Update Delay: 365</li>
+<li>Quality Update Delay: 30</li>
+</ul>
+<p>Settings &gt; Network &amp; Internet &gt; WiFi (or Ethernet) &gt; Click on some Network Name &gt; Metered Connection &gt; On</p>
+<p>Metered connections will install Quality Updates but not Feature Updates.</p>
+<blockquote>
+<p>Windows 10 Update Types include <strong>feature updates</strong> to add new features and occur 2x/year in approx March and September and <strong>quality updates</strong> to enhance security and reliability and occur about once per month. Windows 10 Update Channels include Windows Insider, Semi-Annual (Targeted), Semi-Annual, and Long-Term Servicing. For details see <a href="https://docs.microsoft.com/en-us/windows/deployment/update/waas-overview">https://docs.microsoft.com/en-us/windows/deployment/update/waas-overview</a></p>
+</blockquote>
+<h2 id="257restorepoint">2/5/7. Restore Point</h2>
+<p>Search for &quot;Create a restore point&quot;</p>
+<h2 id="3memorydiagnostics">3. Memory Diagnostics</h2>
+<p>Search for &quot;Memory diagnostic&quot;</p>
+<p>After performing the diagnostic, find details in Event Viewer &gt; Windows Logs &gt; System and search for <code>MemoryDiagnostics</code></p>
+<h2 id="4myessentialsoftware">4. My Essential Software</h2>
+<ul>
+<li>Windows Terminal</li>
+<li>Vim</li>
+<li>Git</li>
+<li>Firefox &amp; Brave</li>
+<li>BitWarden</li>
+</ul>
+<p>And map caps lock to control via PowerShell.  Then restart the computer.</p>
+<pre><code>$hexified = &quot;00,00,00,00,00,00,00,00,02,00,00,00,1d,00,3a,00,00,00,00,00&quot;.Split(',') | % { &quot;0x$_&quot;};
+
+$kbLayout = 'HKLM:\System\CurrentControlSet\Control\Keyboard Layout';
+
+New-ItemProperty -Path $kbLayout -Name &quot;Scancode Map&quot; -PropertyType Binary -Value ([byte[]]$hexified);
+</code></pre>
+<h1 id="screenshots">Screen Shots</h1>
+<h3 id="advancedwindowsupdatesettings">Advanced Windows Update Settings</h3>
+<p>This is available in Windows 10 Professional</p>
+<p><img src="https://bigfont.ca/content/images/2018/01/Capture-3.PNG" alt=""></p>
+<h3 id="meteredconnections">Metered Connections</h3>
+<p><img src="https://bigfont.ca/content/images/2018/01/Capture-4.PNG" alt=""></p>
+<h3 id="restorepoint">Restore Point</h3>
+<p><img src="https://bigfont.ca/content/images/2018/01/Capture-2.PNG" alt=""></p>
+<h3 id="memorydiagnostics">Memory Diagnostics</h3>
+<p><img src="https://bigfont.ca/content/images/2018/01/Capture.PNG" alt=""></p>
+<!--kg-card-end: markdown--><!--kg-card-end: markdown-->
+                </div>
+            </section>
+
+
+            <footer class="post-full-footer">
+
+
+                    
+<section class="author-card">
+        <img class="author-profile-image" src="http://www.gravatar.com/avatar/a5f32a0e420e00997e87ee2e565a30bd?s=250&amp;d=mm&amp;r=x" alt="Shaun Luttin" />
+    <section class="author-card-content">
+        <h4 class="author-card-name"><a href="../author/shaun/index.html">Shaun Luttin</a></h4>
+            <p>Read <a href="../author/shaun/index.html">more posts</a> by this author.</p>
+    </section>
+</section>
+<div class="post-full-footer-right">
+    <a class="author-card-button" href="../author/shaun/index.html">Read More</a>
+</div>
+
+
+            </footer>
+
+
+        </article>
+
+    </div>
+</main>
+
+<aside class="read-next outer">
+    <div class="inner">
+        <div class="read-next-feed">
+                <article class="read-next-card"
+
+                >
+                    <header class="read-next-card-header">
+                        <small class="read-next-card-header-sitetitle">&mdash; BigFont Blog &mdash;</small>
+                        <h3 class="read-next-card-header-title"><a href="../tag/windows-10/index.html">windows-10</a></h3>
+                    </header>
+                    <div class="read-next-divider"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 14.5s2 3 5 3 5.5-2.463 5.5-5.5S21 6.5 18 6.5c-5 0-7 11-12 11C2.962 17.5.5 15.037.5 12S3 6.5 6 6.5s4.5 3.5 4.5 3.5"/></svg>
+</div>
+                    <div class="read-next-card-content">
+                        <ul>
+                            <li><a href="../how-to-release-a-locked-port-in-windows-from-powershell/index.html">How to use PowerShell to release a locked Windows port?</a></li>
+                            <li><a href="../starting-with-wsl-2/index.html">Starting with WSL 2</a></li>
+                            <li><a href="../serve-php-files-from-the-command-line-in-windows/index.html">Serve PHP files from the command line in Windows</a></li>
+                        </ul>
+                    </div>
+                    <footer class="read-next-card-footer">
+                        <a href="../tag/windows-10/index.html">See all 6 posts →</a>
+                    </footer>
+                </article>
+
+                <article class="post-card post no-image">
+
+
+    <div class="post-card-content">
+
+        <a class="post-card-content-link" href="../starting-htbox-allready-web-app-development-2/index.html">
+
+            <header class="post-card-header">
+                <h2 class="post-card-title">Starting HTBox AllReady Web App Development</h2>
+            </header>
+
+            <section class="post-card-excerpt">
+                <p>These are summary steps for getting started. There are more details here.  First fork the https://github.com/HTBox/allReady repository. We forked it to github.com:shaunluttin.  Then:  git clone git@github.</p>
+            </section>
+
+        </a>
+
+        <footer class="post-card-meta">
+
+            <ul class="author-list">
+                <li class="author-list-item">
+
+                    <div class="author-name-tooltip">
+                        Shaun Luttin
+                    </div>
+
+                        <a href="../author/shaun/index.html" class="static-avatar">
+                            <img class="author-profile-image" src="http://www.gravatar.com/avatar/a5f32a0e420e00997e87ee2e565a30bd?s=250&amp;d=mm&amp;r=x" alt="Shaun Luttin" />
+                        </a>
+                </li>
+            </ul>
+
+            <span class="reading-time">1 min read</span>
+
+        </footer>
+
+    </div>
+
+</article>
+
+                <article class="post-card post no-image">
+
+
+    <div class="post-card-content">
+
+        <a class="post-card-content-link" href="../some-more-career-related-ultimate-goals/index.html">
+
+            <header class="post-card-header">
+                <h2 class="post-card-title">Some Career Related Ultimate Goals for 2018</h2>
+            </header>
+
+            <section class="post-card-excerpt">
+                <p>These goals are a continuation of last years goals.  Algorithms:  Complete five Project Euler puzzles (without looking at other peoples' answers). As a bonus, complete one of them in F#.  Implement each of</p>
+            </section>
+
+        </a>
+
+        <footer class="post-card-meta">
+
+            <ul class="author-list">
+                <li class="author-list-item">
+
+                    <div class="author-name-tooltip">
+                        Shaun Luttin
+                    </div>
+
+                        <a href="../author/shaun/index.html" class="static-avatar">
+                            <img class="author-profile-image" src="http://www.gravatar.com/avatar/a5f32a0e420e00997e87ee2e565a30bd?s=250&amp;d=mm&amp;r=x" alt="Shaun Luttin" />
+                        </a>
+                </li>
+            </ul>
+
+            <span class="reading-time">1 min read</span>
+
+        </footer>
+
+    </div>
+
+</article>
+
+        </div>
+    </div>
+</aside>
+
+<div class="floating-header">
+    <div class="floating-header-logo">
+        <a href="https://bigfont.ca/">
+            <span>BigFont Blog</span>
+        </a>
+    </div>
+    <span class="floating-header-divider">&mdash;</span>
+    <div class="floating-header-title">Windows 10 Setup First Steps</div>
+    <div class="floating-header-share">
+        <div class="floating-header-share-label">Share this <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M7.5 15.5V4a1.5 1.5 0 1 1 3 0v4.5h2a1 1 0 0 1 1 1h2a1 1 0 0 1 1 1H18a1.5 1.5 0 0 1 1.5 1.5v3.099c0 .929-.13 1.854-.385 2.748L17.5 23.5h-9c-1.5-2-5.417-8.673-5.417-8.673a1.2 1.2 0 0 1 1.76-1.605L7.5 15.5zm6-6v2m-3-3.5v3.5m6-1v2"/>
+</svg>
+</div>
+        <a class="floating-header-share-tw" href="https://twitter.com/share?text=Windows%2010%20Setup%20First%20Steps&amp;url=https://bigfont.ca/windows-10-setup-first-steps/"
+            onclick="window.open(this.href, 'share-twitter', 'width=550,height=235');return false;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M30.063 7.313c-.813 1.125-1.75 2.125-2.875 2.938v.75c0 1.563-.188 3.125-.688 4.625a15.088 15.088 0 0 1-2.063 4.438c-.875 1.438-2 2.688-3.25 3.813a15.015 15.015 0 0 1-4.625 2.563c-1.813.688-3.75 1-5.75 1-3.25 0-6.188-.875-8.875-2.625.438.063.875.125 1.375.125 2.688 0 5.063-.875 7.188-2.5-1.25 0-2.375-.375-3.375-1.125s-1.688-1.688-2.063-2.875c.438.063.813.125 1.125.125.5 0 1-.063 1.5-.25-1.313-.25-2.438-.938-3.313-1.938a5.673 5.673 0 0 1-1.313-3.688v-.063c.813.438 1.688.688 2.625.688a5.228 5.228 0 0 1-1.875-2c-.5-.875-.688-1.813-.688-2.75 0-1.063.25-2.063.75-2.938 1.438 1.75 3.188 3.188 5.25 4.25s4.313 1.688 6.688 1.813a5.579 5.579 0 0 1 1.5-5.438c1.125-1.125 2.5-1.688 4.125-1.688s3.063.625 4.188 1.813a11.48 11.48 0 0 0 3.688-1.375c-.438 1.375-1.313 2.438-2.563 3.188 1.125-.125 2.188-.438 3.313-.875z"/></svg>
+        </a>
+        <a class="floating-header-share-fb" href="https://www.facebook.com/sharer/sharer.php?u=https://bigfont.ca/windows-10-setup-first-steps/"
+            onclick="window.open(this.href, 'share-facebook','width=580,height=296');return false;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M19 6h5V0h-5c-3.86 0-7 3.14-7 7v3H8v6h4v16h6V16h5l1-6h-6V7c0-.542.458-1 1-1z"/></svg>
+        </a>
+    </div>
+    <progress id="reading-progress" class="progress" value="0">
+        <div class="progress-container">
+            <span class="progress-bar"></span>
+        </div>
+    </progress>
+</div>
+
+
+
+
+        <footer class="site-footer outer">
+            <div class="site-footer-content inner">
+                <section class="copyright"><a href="https://bigfont.ca/">BigFont Blog</a> &copy; 2022</section>
+                <nav class="site-footer-nav">
+                    <a href="https://bigfont.ca/">Latest Posts</a>
+                    
+                    
+                    <a href="https://ghost.org/" target="_blank" rel="noopener">Ghost</a>
+                </nav>
+            </div>
+        </footer>
+
+    </div>
+
+
+    <script>
+        var images = document.querySelectorAll('.kg-gallery-image img');
+        images.forEach(function (image) {
+            var container = image.closest('.kg-gallery-image');
+            var width = image.attributes.width.value;
+            var height = image.attributes.height.value;
+            var ratio = width / height;
+            container.style.flex = ratio + ' 1 0%';
+        })
+    </script>
+
+
+    <script
+        src="https://code.jquery.com/jquery-3.2.1.min.js"
+        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous">
+    </script>
+    <script type="text/javascript" src="../assets/built/jquery.fitvidsc03d.js?v=3e32194df1"></script>
+
+    <script src="../assets/built/infinitescrollc03d.js?v=3e32194df1"></script>
+
+    <script>
+
+// NOTE: Scroll performance is poor in Safari
+// - this appears to be due to the events firing much more slowly in Safari.
+//   Dropping the scroll event and using only a raf loop results in smoother
+//   scrolling but continuous processing even when not scrolling
+$(document).ready(function () {
+    // Start fitVids
+    var $postContent = $(".post-full-content");
+    $postContent.fitVids();
+    // End fitVids
+
+    var progressBar = document.querySelector('#reading-progress');
+    var header = document.querySelector('.floating-header');
+    var title = document.querySelector('.post-full-title');
+
+    var lastScrollY = window.scrollY;
+    var lastWindowHeight = window.innerHeight;
+    var lastDocumentHeight = $(document).height();
+    var ticking = false;
+
+    function onScroll() {
+        lastScrollY = window.scrollY;
+        requestTick();
+    }
+
+    function onResize() {
+        lastWindowHeight = window.innerHeight;
+        lastDocumentHeight = $(document).height();
+        requestTick();
+    }
+
+    function requestTick() {
+        if (!ticking) {
+            requestAnimationFrame(update);
+        }
+        ticking = true;
+    }
+
+    function update() {
+        var trigger = title.getBoundingClientRect().top + window.scrollY;
+        var triggerOffset = title.offsetHeight + 35;
+        var progressMax = lastDocumentHeight - lastWindowHeight;
+
+        // show/hide floating header
+        if (lastScrollY >= trigger + triggerOffset) {
+            header.classList.add('floating-active');
+        } else {
+            header.classList.remove('floating-active');
+        }
+
+        progressBar.setAttribute('max', progressMax);
+        progressBar.setAttribute('value', lastScrollY);
+
+        ticking = false;
+    }
+
+    window.addEventListener('scroll', onScroll, {passive: true});
+    window.addEventListener('resize', onResize, false);
+
+    update();
+
+});
+</script>
+
+
+    
+
+</body>
+
+<!-- Mirrored from bigfontblog.azurewebsites.net/windows-10-setup-first-steps/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 09 Dec 2022 10:53:33 GMT -->
+</html>

@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from bigfontblog.azurewebsites.net/consideration-for-introduce-automated-code-formatting-into-a-large-existing-net-code-base/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 09 Dec 2022 10:53:46 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <title>Considerations for C#.NET code formatting in a distributed microservice application that spans multiple Git repositories.</title>
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" type="text/css" href="../assets/built/screenc03d.css?v=3e32194df1" />
+
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon" />
+    <link rel="canonical" href="https://bigfont.ca/consideration-for-introduce-automated-code-formatting-into-a-large-existing-net-code-base/" />
+    <meta name="referrer" content="no-referrer-when-downgrade" />
+    <link rel="amphtml" href="https://bigfont.ca/consideration-for-introduce-automated-code-formatting-into-a-large-existing-net-code-base/amp/" />
+    
+    <meta property="og:site_name" content="BigFont Blog" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Considerations for C#.NET code formatting in a distributed microservice application that spans multiple Git repositories." />
+    <meta property="og:description" content="The problem is...
+it is expensive for a company to format code manually, but it is also expensive
+not to format code at all.
+
+Summary from ThoughWorks Tech Radar
+&gt; For as long as we can remember, what style to use for formatting code has been a
+matter of personal taste, company policy and heated debate. Finally, the
+industry appears to be tiring of this endless argument and teams are freeing up
+surprisingly large amounts of time by forgoing these discussions and just
+adopting opinionated and aut" />
+    <meta property="og:url" content="https://bigfont.ca/consideration-for-introduce-automated-code-formatting-into-a-large-existing-net-code-base/" />
+    <meta property="article:published_time" content="2021-02-20T01:00:34.000Z" />
+    <meta property="article:modified_time" content="2021-02-25T20:08:17.000Z" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Considerations for C#.NET code formatting in a distributed microservice application that spans multiple Git repositories." />
+    <meta name="twitter:description" content="The problem is...
+it is expensive for a company to format code manually, but it is also expensive
+not to format code at all.
+
+Summary from ThoughWorks Tech Radar
+&gt; For as long as we can remember, what style to use for formatting code has been a
+matter of personal taste, company policy and heated debate. Finally, the
+industry appears to be tiring of this endless argument and teams are freeing up
+surprisingly large amounts of time by forgoing these discussions and just
+adopting opinionated and aut" />
+    <meta name="twitter:url" content="https://bigfont.ca/consideration-for-introduce-automated-code-formatting-into-a-large-existing-net-code-base/" />
+    <meta name="twitter:label1" content="Written by" />
+    <meta name="twitter:data1" content="Shaun Luttin" />
+    
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name": "BigFont Blog",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://bigfont.ca/content/images/2016/10/business_casual_cropped_square.jpg",
+            "width": 60,
+            "height": 60
+        }
+    },
+    "author": {
+        "@type": "Person",
+        "name": "Shaun Luttin",
+        "image": {
+            "@type": "ImageObject",
+            "url": "//www.gravatar.com/avatar/a5f32a0e420e00997e87ee2e565a30bd?s=250&d=mm&r=x",
+            "width": 250,
+            "height": 250
+        },
+        "url": "https://bigfont.ca/author/shaun/",
+        "sameAs": []
+    },
+    "headline": "Considerations for C#.NET code formatting in a distributed microservice application that spans multiple Git repositories.",
+    "url": "https://bigfont.ca/consideration-for-introduce-automated-code-formatting-into-a-large-existing-net-code-base/",
+    "datePublished": "2021-02-20T01:00:34.000Z",
+    "dateModified": "2021-02-25T20:08:17.000Z",
+    "description": "The problem is...\nit is expensive for a company to format code manually, but it is also expensive\nnot to format code at all.\n\nSummary from ThoughWorks Tech Radar\n&gt; For as long as we can remember, what style to use for formatting code has been a\nmatter of personal taste, company policy and heated debate. Finally, the\nindustry appears to be tiring of this endless argument and teams are freeing up\nsurprisingly large amounts of time by forgoing these discussions and just\nadopting opinionated and aut",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://bigfont.ca/"
+    }
+}
+    </script>
+
+    <script src="../public/ghost-sdk.minc03d.js?v=3e32194df1"></script>
+<script>
+ghost.init({
+	clientId: "ghost-frontend",
+	clientSecret: "d312fafda9a4"
+});
+</script>
+    <meta name="generator" content="Ghost 2.30" />
+    <link rel="alternate" type="application/rss+xml" title="BigFont Blog" href="https://bigfont.ca/rss/" />
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-85719272-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+<style>
+    .img-attribution {
+      font-size:12px;
+    }
+    
+    table.pros-and-cons {
+      table-layout:'fixed';
+    }
+    
+    table.pros-and-cons colgroup col {
+      width:40%;
+    }
+
+    table.pros-and-cons colgroup col:first-of-type {
+      width:20%;
+    }
+
+    table.pros-and-cons th,
+    table.pros-and-cons p {
+      white-space:break-spaces;
+    }
+</style>
+
+</head>
+<body class="post-template">
+
+    <div class="site-wrapper">
+
+        
+
+<header class="site-header outer">
+    <div class="inner">
+        <nav class="site-nav">
+    <div class="site-nav-left">
+                <a class="site-nav-logo" href="https://bigfont.ca/"><img src="../content/images/2016/10/business_casual_cropped_square.jpg" alt="BigFont Blog" /></a>
+            <ul class="nav" role="menu">
+    <li class="nav-home" role="menuitem"><a href="../index.html">Home</a></li>
+    <li class="nav-about" role="menuitem"><a href="../about/index.html">About</a></li>
+    <li class="nav-bibliography-work" role="menuitem"><a href="../work-bibliography/index.html">Bibliography (Work)</a></li>
+</ul>
+
+    </div>
+    <div class="site-nav-right">
+        <div class="social-links">
+        </div>
+            <a class="rss-button" href="https://feedly.com/i/subscription/feed/https://bigfont.ca/rss/" title="RSS" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="6.18" cy="17.82" r="2.18"/><path d="M4 4.44v2.83c7.03 0 12.73 5.7 12.73 12.73h2.83c0-8.59-6.97-15.56-15.56-15.56zm0 5.66v2.83c3.9 0 7.07 3.17 7.07 7.07h2.83c0-5.47-4.43-9.9-9.9-9.9z"/></svg>
+</a>
+    </div>
+</nav>
+    </div>
+</header>
+
+
+<main id="site-main" class="site-main outer">
+    <div class="inner">
+
+        <article class="post-full post no-image">
+
+            <header class="post-full-header">
+                <section class="post-full-meta">
+                    <time class="post-full-meta-date" datetime="2021-02-19">19 February 2021</time>
+                </section>
+                <h1 class="post-full-title">Considerations for C#.NET code formatting in a distributed microservice application that spans multiple Git repositories.</h1>
+            </header>
+
+
+            <section class="post-full-content">
+                <div class="post-content">
+                    <h1 id="the-problem-is-">The problem is...</h1><p>it is expensive for a company to format code manually, but it is also expensive not to format code at all.</p><h1 id="summary-from-thoughworks-tech-radar">Summary from ThoughWorks Tech Radar</h1><blockquote>For as long as we can remember, what style to use for formatting code has been a matter of personal taste, company policy and heated debate.<strong><u> Finally, the industry appears to be tiring of this endless argument and teams are freeing up surprisingly large amounts of time by forgoing these discussions and just adopting opinionated and automated code formatting tools.</u></strong> Even if you don't agree 100% with the opinions of the various tools, the benefits of focusing on what your code does rather than how it looks is something most teams should be able to get behind. <a href="https://www.thoughtworks.com/radar/tools/prettier"><strong>Prettier</strong></a> has been getting our vote for JavaScript, but similar tools, such as <a href="https://github.com/ambv/black"><strong>Black</strong></a> for Python, are available for many other languages and are increasingly being built-in as we see with <a href="https://golang.org/cmd/gofmt/"><strong>Golang</strong></a> and <a href="https://elixir-lang.org/blog/2018/01/17/elixir-v1-6-0-released/"><strong>Elixir</strong></a>. The key here is not to spend hours discussing which rules to enforce, but instead pick a tool that is opinionated, minimally configurable and automated — ideally as a pre-commit hook. Quoted from (<a href="https://www.thoughtworks.com/radar/techniques/opinionated-and-automated-code-formatting">https://www.thoughtworks.com/radar/techniques/opinionated-and-automated-code-formatting</a>)</blockquote><h1 id="bits">Bits</h1><h3 id="community-content">Community Content</h3><ul><li><a href="https://www.reddit.com/r/AskProgramming/comments/eojat4/do_you_format_your_code_manually_or_use/">https://www.reddit.com/r/AskProgramming/comments/eojat4/do_you_format_your_code_manually_or_use/</a></li><li><a href="https://www.thoughtworks.com/radar/techniques/opinionated-and-automated-code-formatting">https://www.thoughtworks.com/radar/techniques/opinionated-and-automated-code-formatting</a></li><li><a href="https://hn.algolia.com/?dateRange=all&amp;page=0&amp;prefix=true&amp;query=prettier%20gofmt&amp;sort=byPopularity&amp;type=comment">https://hn.algolia.com/?dateRange=all&amp;page=0&amp;prefix=true&amp;query=prettier gofmt&amp;sort=byPopularity&amp;type=comment</a></li></ul><h3 id="there-are-bigger-fish-to-fry-business-value-">There are Bigger Fish to Fry (Business Value).</h3><ul><li>Conversations about formatting really waste time and is cyclical.</li><li>Formatting code takes energy without adding value for customers.</li><li>Formatting code takes energy away from adding new features and/or fixing bugs.</li></ul><h3 id="messiness-decreases-readability-individual-productivity-">Messiness Decreases Readability (Individual Productivity).</h3><ul><li>A laissez-faire approach to formatting makes it difficult to scan code quickly. </li><li>A <code>diff</code> against two files with different formatting produces a lot of noise. </li></ul><h3 id="conflict-is-inevitable-team-cohesion-">Conflict is Inevitable (Team Cohesion)</h3><ul><li>No two developers have exactly the same code formatting preferences.</li><li>Objective criteria do not exist for choosing "the best" code formatting style.</li><li>Team cohesion is at risk of decreasing whenever code formatting presents a productivity obstacle.</li></ul><h3 id="manual-formatting-is-a-drag-team-cohesion-">Manual Formatting is a Drag (Team Cohesion)</h3><ul><li>Manually formatting code can be a chore. </li><li>Even for those who like to format code, manually formatting it to someone else's standards tends to be demoralizing and can build resentment. </li></ul><h3 id="changing-formats-is-difficult-team-cohesion-">Changing Formats is Difficult (Team Cohesion)</h3><ul><li>Language format trends change over time; for instance, the style of 2005 for C# is not the same as it is now in 2021. </li><li>If the team decides to follow modern conventions, overhauling the code base is a manual process. </li></ul><h3 id="differences-in-format-is-noise-individual-productivity-">Differences in Format is Noise (Individual Productivity)</h3><ul><li>Changes to code formatting in a pull request obscure meaningful changes.</li><li>Containing code formatting is separate commits adds overhead.</li><li>Switching between code formatting styles in a code base decreases readability.</li></ul><h1 id="possible-actions">Possible Actions</h1><h3 id="what-style-guide-to-use">What style guide to use?</h3><ol><li>Take a laissez-faire approach to formatting - there is no style guide.</li><li>Create an internal style guide. </li><li>Adopt an external style guide and tweak it to suite team preferences. </li><li>Adopt an external style guide and make it immutable.</li></ol><h3 id="how-to-adhere-to-the-style">How to adhere to the style?</h3><ol><li>Take a laissez-faire approach to enforcement - it is a guideline only.</li><li>Use code review to point out differences from the style guide. </li><li>Use a linting tool / code analysis tool to point out differences. </li><li>Use a automated code formatting tool to catch and automatically fix differences.</li></ol><h1 id="pros-and-cons">Pros and Cons</h1><h3 id="what-style-guide-to-use-1">What style guide to use?</h3><!--kg-card-begin: html--><table class="pros-and-cons">
+    <colgroup>
+		<col>	
+		<col>
+		<col>	
+	</colgroup>
+  <thead>
+    <tr>
+      <th></th>
+      <th>Benefit</th>
+      <th>Cost / Risk</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+        <th>Laissez-Faire</th>
+      <td>
+          <p>Avoid manual code formatting.</p>        
+          <p>Avoid confrontations about preferences in code formatting.</p>
+      </td>
+      <td>
+        <p>Conflicts go unresolved as the team avoids confrontation.</p>
+        <p>Lack of consistent formatting decreases readability.</p>        
+        <p>Automated code formatting is not possible.</p>
+      </td>
+    </tr>
+    <tr>
+      <th>Internal Style Guide</th>
+      <td>
+        <p>Initial sense of encouragement as the team devises standards.</p>
+      </td>
+      <td>
+        <p>Conflicts around style resolve through democratic process, top-down dictatorship, or most effective complainer.</p>
+        <p>The sheer number of formatting rules makes democratic process and/or consensus building extremely time consuming.</p>
+        <p>A company that was in the business of building a SaaS product is now in the business of creating and curating a style guide.</p>
+      <p>Automated code formatting is not possible without building an internal code cleanup tool.</p>
+   </td>
+    </tr>
+    <tr>
+      <th>External Style Guide with Tweaks</th>
+      <td>
+        <p>There will be consensus among the team about most of the external style-guides rules.</p>
+        <p>Automated code formatting is possible if the tweaks are within the external style guides options.</p>
+      </td>
+      <td>
+        <p>About 10% of the external style-guides rules will offend the aesthetic sense of some of the team.</p>
+        <p>Resolving conflict about that 10% of the style guide faces the same challenges, on a different scale, as we found in the Internal Style Guide approach.</p>
+      <p>Automated code formatting is not possible if the tweaks are not within the external style guides options.</p>
+      </td>
+    </tr>
+    <tr>
+      <th>External Style Guide without Tweaks</th>
+      <td>
+        <p>No internal debate about individual stylistic choices.</p>
+        <p>Over time, the team gets used to the new style. Some initial detractors start to prefer it.</p>
+        <p>Automated code formatting is possible.</p>
+      </td>
+      <td>
+        <p>The external guide will offend at least some aesthetic sensibilities of most developers over the long-term.</p>
+        <p>Few members of the team are totally stoked about the new style.</p>
+      </td>
+    </tr>
+  </tbody>
+</table><!--kg-card-end: html--><h3 id="how-to-adhere-to-the-style-1">How to adhere to the style?</h3><!--kg-card-begin: html--><table class="pros-and-cons">
+        <colgroup>
+		<col>	
+		<col>
+		<col>	
+	</colgroup>
+    
+    <thead>
+  <tr>
+    <th></th>
+    <th>Benefit</th>
+    <th>Cost / Risk</th>
+  </tr>
+</thead><tbody>
+  <tr>
+    <th>Laissez-Faire</th>
+      <td><p>Avoid work on code formatting</p></td>
+    <td>
+        <p>The problems of inconsistent code formatting go unresolved.</p>
+      </td>
+  </tr>
+  <tr>
+    <th>Code Review</th>
+      <td><p>Over time, the team might produce a consistently formatted code base.</p>
+          <p>Those who do not care about code formatting can choose not to raise the topic in code review.</p>
+      </td>
+    <td>
+        <p>Reviewers who care about code formatting will run into conflict with developers who do not care about code formatting.</p>
+        <p>Code review time that could be used to find faults in logic is taken up by finding faults in style adherence.</p>
+      </td>
+  </tr>
+  <tr>
+    <th>Linting Tool</th>
+    <td>
+      <p>Over time, the team might produce a consistently formatted code base.</p>
+      </td>
+    <td>
+        <p>The team still needs to format code manually.</p>
+        <p>A linting tool is available only for supported, external style guides.</p>
+      </td>
+  </tr>
+  <tr>
+    <th>Cleanup Tool in IDE</th>
+    <td>
+        <p>More developer time/energy is spent on developing features and fixing bugs.</p>
+        <p>The team does not have to spend any time reviewing code for style or manually formatting code to fit a standard.</p>
+      </td>
+    <td>
+      <p>Developers need to remember to run the code formatter before pushing to a remote repository.</p>    
+        <p>Running the code formatter involves opening each project the IDE.</p>
+      </td>
+  </tr>
+  <tr>
+    <th>Cleanup Tool on Command Line</th>
+    <td>
+        <p>More developer time/energy is spent on developing features and fixing bugs.</p>
+        <p>The team does not have to spend any time reviewing code for style or manually formatting code to fit a standard.</p>
+      <p>The tool can become part of an automated toolchain. For instance, the formatting can happen before push to the trunk.</p>
+      </td>
+    <td>
+        <p>Running the tool requires installation of software.</p>
+        <p>Some team members might not like the set of styles that the cleanup tool supports.</p>
+        <p>Running the automated code formatter takes time, and that time increases as the number of files to format increases.</p>
+      </td>
+  </tr>
+</tbody></table><!--kg-card-end: html--><h1 id="our-choice-is-">Our Choice Is...</h1><p>Naturally, the choice is entirely up to your team. </p><p>If you do decide on automated code formatting, here are some consideration for how exactly you might do it.</p><h1 id="how-exactly">How exactly?</h1><p>Here is how to use a cleanup tool on the command line for a microservice architecture in .NET Framework / .NET Core. We're going to demonstrate the <em><strong>ReSharper</strong> command line tool.</em></p><h3 id="install-the-resharper-command-line-tools">Install the ReSharper Command Line Tools</h3><!--kg-card-begin: code--><pre><code>choco install resharper-clt.portable --pre -y</code></pre><!--kg-card-end: code--><h3 id="run-cleanup-code-on-a-single-file">Run Cleanup Code on a Single File</h3><!--kg-card-begin: code--><pre><code class="language-cmd">cleanupcode Path\To\Some\File.cs
+</code></pre><!--kg-card-end: code--><p>Usually I run the above from a solution directory or a project directory. </p><h3 id="view-the-help-for-the-tool">View the Help for the Tool</h3><!--kg-card-begin: code--><pre><code>cleanupcode --help</code></pre><!--kg-card-end: code--><p>After reading that help, savvy developers can figure out many use cases.</p><h3 id="run-the-cleanup-on-an-entire-project">Run the Cleanup on an Entire Project</h3><!--kg-card-begin: code--><pre><code>cleanupcode .\Api.v2.csproj --include="*/**/*.cs"</code></pre><!--kg-card-end: code--><h3 id="run-the-cleanup-on-an-entire-solution">Run the Cleanup on an Entire Solution</h3><!--kg-card-begin: code--><pre><code>cleanupcode .\Api.v2.sln --include="*/**/*.cs"</code></pre><!--kg-card-end: code--><h3 id="run-the-cleanup-tool-on-every-c-net-file-in-the-company">Run the Cleanup Tool on Every C#.NET File in the Company</h3><!--kg-card-begin: code--><pre><code>Get-ChildItem *.sln -Recurse | ForEach-Object { ... }</code></pre><!--kg-card-end: code--><h3 id="maintain-the-standard-over-time">Maintain the Standard over Time</h3><p>For IDE users, install the Visual Studio extension. </p><p>For command line users, add the cleanup tool as a Git hook that formats <em>only changed files</em>. Using <code>git diff --name-only --diff-filter=AM</code> helps.</p>
+                </div>
+            </section>
+
+
+            <footer class="post-full-footer">
+
+
+                    
+<section class="author-card">
+        <img class="author-profile-image" src="http://www.gravatar.com/avatar/a5f32a0e420e00997e87ee2e565a30bd?s=250&amp;d=mm&amp;r=x" alt="Shaun Luttin" />
+    <section class="author-card-content">
+        <h4 class="author-card-name"><a href="../author/shaun/index.html">Shaun Luttin</a></h4>
+            <p>Read <a href="../author/shaun/index.html">more posts</a> by this author.</p>
+    </section>
+</section>
+<div class="post-full-footer-right">
+    <a class="author-card-button" href="../author/shaun/index.html">Read More</a>
+</div>
+
+
+            </footer>
+
+
+        </article>
+
+    </div>
+</main>
+
+<aside class="read-next outer">
+    <div class="inner">
+        <div class="read-next-feed">
+
+                <article class="post-card post no-image">
+
+
+    <div class="post-card-content">
+
+        <a class="post-card-content-link" href="../debug-an-iis-express-web-application-from-vs-code/index.html">
+
+            <header class="post-card-header">
+                <h2 class="post-card-title">Debug an IIS Express web application from VS Code.</h2>
+            </header>
+
+            <section class="post-card-excerpt">
+                <p>Here is how to build, run, and debug your .NET Framework Web Application with msbuild, iisexpress, and VS Code.  From PowerShell, build your app with a portable Program Database (PDB) output.  msbuild `   /property:</p>
+            </section>
+
+        </a>
+
+        <footer class="post-card-meta">
+
+            <ul class="author-list">
+                <li class="author-list-item">
+
+                    <div class="author-name-tooltip">
+                        Shaun Luttin
+                    </div>
+
+                        <a href="../author/shaun/index.html" class="static-avatar">
+                            <img class="author-profile-image" src="http://www.gravatar.com/avatar/a5f32a0e420e00997e87ee2e565a30bd?s=250&amp;d=mm&amp;r=x" alt="Shaun Luttin" />
+                        </a>
+                </li>
+            </ul>
+
+            <span class="reading-time">1 min read</span>
+
+        </footer>
+
+    </div>
+
+</article>
+
+                <article class="post-card post tag-git tag-linux tag-windows tag-wsl2 tag-wsl ">
+
+    <a class="post-card-image-link" href="../push-and-pull-files-between-windows-10-and-wsl2-file-systems-with-git/index.html">
+        <img class="post-card-image"
+            srcset="/content/images/size/w300/2021/01/integration-composting.jpg 300w,
+                    /content/images/size/w600/2021/01/integration-composting.jpg 600w,
+                    /content/images/size/w1000/2021/01/integration-composting.jpg 1000w,
+                    /content/images/size/w2000/2021/01/integration-composting.jpg 2000w"
+            sizes="(max-width: 1000px) 400px, 700px"
+            src="../content/images/2021/01/integration-composting.jpg"
+            alt="Push and pull files between Windows 10 and WSL2 file systems with Git."
+        />
+    </a>
+
+    <div class="post-card-content">
+
+        <a class="post-card-content-link" href="../push-and-pull-files-between-windows-10-and-wsl2-file-systems-with-git/index.html">
+
+            <header class="post-card-header">
+                    <span class="post-card-tags">git</span>
+                <h2 class="post-card-title">Push and pull files between Windows 10 and WSL2 file systems with Git.</h2>
+            </header>
+
+            <section class="post-card-excerpt">
+                <p>This shows how to push and pull files between the Windows file system and the WSL2 file system.  The unrelated photo shows some integration composting we are doing at the Fernwood Road Cafe</p>
+            </section>
+
+        </a>
+
+        <footer class="post-card-meta">
+
+            <ul class="author-list">
+                <li class="author-list-item">
+
+                    <div class="author-name-tooltip">
+                        Shaun Luttin
+                    </div>
+
+                        <a href="../author/shaun/index.html" class="static-avatar">
+                            <img class="author-profile-image" src="http://www.gravatar.com/avatar/a5f32a0e420e00997e87ee2e565a30bd?s=250&amp;d=mm&amp;r=x" alt="Shaun Luttin" />
+                        </a>
+                </li>
+            </ul>
+
+            <span class="reading-time">1 min read</span>
+
+        </footer>
+
+    </div>
+
+</article>
+
+        </div>
+    </div>
+</aside>
+
+<div class="floating-header">
+    <div class="floating-header-logo">
+        <a href="https://bigfont.ca/">
+            <span>BigFont Blog</span>
+        </a>
+    </div>
+    <span class="floating-header-divider">&mdash;</span>
+    <div class="floating-header-title">Considerations for C#.NET code formatting in a distributed microservice application that spans multiple Git repositories.</div>
+    <div class="floating-header-share">
+        <div class="floating-header-share-label">Share this <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M7.5 15.5V4a1.5 1.5 0 1 1 3 0v4.5h2a1 1 0 0 1 1 1h2a1 1 0 0 1 1 1H18a1.5 1.5 0 0 1 1.5 1.5v3.099c0 .929-.13 1.854-.385 2.748L17.5 23.5h-9c-1.5-2-5.417-8.673-5.417-8.673a1.2 1.2 0 0 1 1.76-1.605L7.5 15.5zm6-6v2m-3-3.5v3.5m6-1v2"/>
+</svg>
+</div>
+        <a class="floating-header-share-tw" href="https://twitter.com/share?text=Considerations%20for%20C%23.NET%20code%20formatting%20in%20a%20distributed%20microservice%20application%20that%20spans%20multiple%20Git%20repositories.&amp;url=https://bigfont.ca/consideration-for-introduce-automated-code-formatting-into-a-large-existing-net-code-base/"
+            onclick="window.open(this.href, 'share-twitter', 'width=550,height=235');return false;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M30.063 7.313c-.813 1.125-1.75 2.125-2.875 2.938v.75c0 1.563-.188 3.125-.688 4.625a15.088 15.088 0 0 1-2.063 4.438c-.875 1.438-2 2.688-3.25 3.813a15.015 15.015 0 0 1-4.625 2.563c-1.813.688-3.75 1-5.75 1-3.25 0-6.188-.875-8.875-2.625.438.063.875.125 1.375.125 2.688 0 5.063-.875 7.188-2.5-1.25 0-2.375-.375-3.375-1.125s-1.688-1.688-2.063-2.875c.438.063.813.125 1.125.125.5 0 1-.063 1.5-.25-1.313-.25-2.438-.938-3.313-1.938a5.673 5.673 0 0 1-1.313-3.688v-.063c.813.438 1.688.688 2.625.688a5.228 5.228 0 0 1-1.875-2c-.5-.875-.688-1.813-.688-2.75 0-1.063.25-2.063.75-2.938 1.438 1.75 3.188 3.188 5.25 4.25s4.313 1.688 6.688 1.813a5.579 5.579 0 0 1 1.5-5.438c1.125-1.125 2.5-1.688 4.125-1.688s3.063.625 4.188 1.813a11.48 11.48 0 0 0 3.688-1.375c-.438 1.375-1.313 2.438-2.563 3.188 1.125-.125 2.188-.438 3.313-.875z"/></svg>
+        </a>
+        <a class="floating-header-share-fb" href="https://www.facebook.com/sharer/sharer.php?u=https://bigfont.ca/consideration-for-introduce-automated-code-formatting-into-a-large-existing-net-code-base/"
+            onclick="window.open(this.href, 'share-facebook','width=580,height=296');return false;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M19 6h5V0h-5c-3.86 0-7 3.14-7 7v3H8v6h4v16h6V16h5l1-6h-6V7c0-.542.458-1 1-1z"/></svg>
+        </a>
+    </div>
+    <progress id="reading-progress" class="progress" value="0">
+        <div class="progress-container">
+            <span class="progress-bar"></span>
+        </div>
+    </progress>
+</div>
+
+
+
+
+        <footer class="site-footer outer">
+            <div class="site-footer-content inner">
+                <section class="copyright"><a href="https://bigfont.ca/">BigFont Blog</a> &copy; 2022</section>
+                <nav class="site-footer-nav">
+                    <a href="https://bigfont.ca/">Latest Posts</a>
+                    
+                    
+                    <a href="https://ghost.org/" target="_blank" rel="noopener">Ghost</a>
+                </nav>
+            </div>
+        </footer>
+
+    </div>
+
+
+    <script>
+        var images = document.querySelectorAll('.kg-gallery-image img');
+        images.forEach(function (image) {
+            var container = image.closest('.kg-gallery-image');
+            var width = image.attributes.width.value;
+            var height = image.attributes.height.value;
+            var ratio = width / height;
+            container.style.flex = ratio + ' 1 0%';
+        })
+    </script>
+
+
+    <script
+        src="https://code.jquery.com/jquery-3.2.1.min.js"
+        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous">
+    </script>
+    <script type="text/javascript" src="../assets/built/jquery.fitvidsc03d.js?v=3e32194df1"></script>
+
+    <script src="../assets/built/infinitescrollc03d.js?v=3e32194df1"></script>
+
+    <script>
+
+// NOTE: Scroll performance is poor in Safari
+// - this appears to be due to the events firing much more slowly in Safari.
+//   Dropping the scroll event and using only a raf loop results in smoother
+//   scrolling but continuous processing even when not scrolling
+$(document).ready(function () {
+    // Start fitVids
+    var $postContent = $(".post-full-content");
+    $postContent.fitVids();
+    // End fitVids
+
+    var progressBar = document.querySelector('#reading-progress');
+    var header = document.querySelector('.floating-header');
+    var title = document.querySelector('.post-full-title');
+
+    var lastScrollY = window.scrollY;
+    var lastWindowHeight = window.innerHeight;
+    var lastDocumentHeight = $(document).height();
+    var ticking = false;
+
+    function onScroll() {
+        lastScrollY = window.scrollY;
+        requestTick();
+    }
+
+    function onResize() {
+        lastWindowHeight = window.innerHeight;
+        lastDocumentHeight = $(document).height();
+        requestTick();
+    }
+
+    function requestTick() {
+        if (!ticking) {
+            requestAnimationFrame(update);
+        }
+        ticking = true;
+    }
+
+    function update() {
+        var trigger = title.getBoundingClientRect().top + window.scrollY;
+        var triggerOffset = title.offsetHeight + 35;
+        var progressMax = lastDocumentHeight - lastWindowHeight;
+
+        // show/hide floating header
+        if (lastScrollY >= trigger + triggerOffset) {
+            header.classList.add('floating-active');
+        } else {
+            header.classList.remove('floating-active');
+        }
+
+        progressBar.setAttribute('max', progressMax);
+        progressBar.setAttribute('value', lastScrollY);
+
+        ticking = false;
+    }
+
+    window.addEventListener('scroll', onScroll, {passive: true});
+    window.addEventListener('resize', onResize, false);
+
+    update();
+
+});
+</script>
+
+
+    
+
+</body>
+
+<!-- Mirrored from bigfontblog.azurewebsites.net/consideration-for-introduce-automated-code-formatting-into-a-large-existing-net-code-base/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 09 Dec 2022 10:53:46 GMT -->
+</html>

@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from bigfontblog.azurewebsites.net/ecma-script-modules-in-the-browser/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 09 Dec 2022 10:55:17 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <title>ECMA Script Modules and Module Loading in the Browser</title>
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" type="text/css" href="../assets/built/screenc03d.css?v=3e32194df1" />
+
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon" />
+    <link rel="canonical" href="https://bigfont.ca/ecma-script-modules-in-the-browser/" />
+    <meta name="referrer" content="no-referrer-when-downgrade" />
+    <link rel="amphtml" href="https://bigfont.ca/ecma-script-modules-in-the-browser/amp/" />
+    
+    <meta property="og:site_name" content="BigFont Blog" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="ECMA Script Modules and Module Loading in the Browser" />
+    <meta property="og:description" content="index.html
+
+ &lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;meta charset&#x3D;&quot;UTF-8&quot;&gt;
+    &lt;title&gt;Modules Demo&lt;/title&gt;
+    &lt;script 
+        src&#x3D;&quot;https://code.jquery.com/jquery-3.3.1.min.js&quot; 
+        crossorigin&#x3D;&quot;anonymous&quot;&gt;&lt;/script&gt;
+    &lt;script type&#x3D;&quot;module&quot; src&#x3D;&quot;index.js&quot;&gt;&lt;/script&gt;
+    &lt;script type&#x3D;&quot;module&quot; src&#x3D;&quot;logger.js&quot;&gt;&lt;/script&gt;
+    &lt;script type&#x3D;&quot;module&quot; src&#x3D;&quot;foo.js&quot;&gt;&lt;/script&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+  
+  &lt;/body&gt;
+&lt;/html&gt;
+
+
+
+index.js
+
+import foo from &quot;./foo.js&quot;
+import log from &quot;./logger.js&quot;;
+
+$(() &#x3D;&gt; {
+    log(" />
+    <meta property="og:url" content="https://bigfont.ca/ecma-script-modules-in-the-browser/" />
+    <meta property="article:published_time" content="2018-05-25T04:31:34.000Z" />
+    <meta property="article:modified_time" content="2018-05-25T04:35:05.000Z" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="ECMA Script Modules and Module Loading in the Browser" />
+    <meta name="twitter:description" content="index.html
+
+ &lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;meta charset&#x3D;&quot;UTF-8&quot;&gt;
+    &lt;title&gt;Modules Demo&lt;/title&gt;
+    &lt;script 
+        src&#x3D;&quot;https://code.jquery.com/jquery-3.3.1.min.js&quot; 
+        crossorigin&#x3D;&quot;anonymous&quot;&gt;&lt;/script&gt;
+    &lt;script type&#x3D;&quot;module&quot; src&#x3D;&quot;index.js&quot;&gt;&lt;/script&gt;
+    &lt;script type&#x3D;&quot;module&quot; src&#x3D;&quot;logger.js&quot;&gt;&lt;/script&gt;
+    &lt;script type&#x3D;&quot;module&quot; src&#x3D;&quot;foo.js&quot;&gt;&lt;/script&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+  
+  &lt;/body&gt;
+&lt;/html&gt;
+
+
+
+index.js
+
+import foo from &quot;./foo.js&quot;
+import log from &quot;./logger.js&quot;;
+
+$(() &#x3D;&gt; {
+    log(" />
+    <meta name="twitter:url" content="https://bigfont.ca/ecma-script-modules-in-the-browser/" />
+    <meta name="twitter:label1" content="Written by" />
+    <meta name="twitter:data1" content="Shaun Luttin" />
+    
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name": "BigFont Blog",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://bigfont.ca/content/images/2016/10/business_casual_cropped_square.jpg",
+            "width": 60,
+            "height": 60
+        }
+    },
+    "author": {
+        "@type": "Person",
+        "name": "Shaun Luttin",
+        "image": {
+            "@type": "ImageObject",
+            "url": "//www.gravatar.com/avatar/a5f32a0e420e00997e87ee2e565a30bd?s=250&d=mm&r=x",
+            "width": 250,
+            "height": 250
+        },
+        "url": "https://bigfont.ca/author/shaun/",
+        "sameAs": []
+    },
+    "headline": "ECMA Script Modules and Module Loading in the Browser",
+    "url": "https://bigfont.ca/ecma-script-modules-in-the-browser/",
+    "datePublished": "2018-05-25T04:31:34.000Z",
+    "dateModified": "2018-05-25T04:35:05.000Z",
+    "description": "index.html\n\n &lt;!DOCTYPE html&gt;\n&lt;html&gt;\n  &lt;head&gt;\n    &lt;meta charset&#x3D;&quot;UTF-8&quot;&gt;\n    &lt;title&gt;Modules Demo&lt;/title&gt;\n    &lt;script \n        src&#x3D;&quot;https://code.jquery.com/jquery-3.3.1.min.js&quot; \n        crossorigin&#x3D;&quot;anonymous&quot;&gt;&lt;/script&gt;\n    &lt;script type&#x3D;&quot;module&quot; src&#x3D;&quot;index.js&quot;&gt;&lt;/script&gt;\n    &lt;script type&#x3D;&quot;module&quot; src&#x3D;&quot;logger.js&quot;&gt;&lt;/script&gt;\n    &lt;script type&#x3D;&quot;module&quot; src&#x3D;&quot;foo.js&quot;&gt;&lt;/script&gt;\n  &lt;/head&gt;\n  &lt;body&gt;\n  \n  &lt;/body&gt;\n&lt;/html&gt;\n\n\n\nindex.js\n\nimport foo from &quot;./foo.js&quot;\nimport log from &quot;./logger.js&quot;;\n\n$(() &#x3D;&gt; {\n    log(",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://bigfont.ca/"
+    }
+}
+    </script>
+
+    <script src="../public/ghost-sdk.minc03d.js?v=3e32194df1"></script>
+<script>
+ghost.init({
+	clientId: "ghost-frontend",
+	clientSecret: "d312fafda9a4"
+});
+</script>
+    <meta name="generator" content="Ghost 2.30" />
+    <link rel="alternate" type="application/rss+xml" title="BigFont Blog" href="https://bigfont.ca/rss/" />
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-85719272-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+<style>
+    .img-attribution {
+      font-size:12px;
+    }
+    
+    table.pros-and-cons {
+      table-layout:'fixed';
+    }
+    
+    table.pros-and-cons colgroup col {
+      width:40%;
+    }
+
+    table.pros-and-cons colgroup col:first-of-type {
+      width:20%;
+    }
+
+    table.pros-and-cons th,
+    table.pros-and-cons p {
+      white-space:break-spaces;
+    }
+</style>
+
+</head>
+<body class="post-template">
+
+    <div class="site-wrapper">
+
+        
+
+<header class="site-header outer">
+    <div class="inner">
+        <nav class="site-nav">
+    <div class="site-nav-left">
+                <a class="site-nav-logo" href="https://bigfont.ca/"><img src="../content/images/2016/10/business_casual_cropped_square.jpg" alt="BigFont Blog" /></a>
+            <ul class="nav" role="menu">
+    <li class="nav-home" role="menuitem"><a href="../index.html">Home</a></li>
+    <li class="nav-about" role="menuitem"><a href="../about/index.html">About</a></li>
+    <li class="nav-bibliography-work" role="menuitem"><a href="../work-bibliography/index.html">Bibliography (Work)</a></li>
+</ul>
+
+    </div>
+    <div class="site-nav-right">
+        <div class="social-links">
+        </div>
+            <a class="rss-button" href="https://feedly.com/i/subscription/feed/https://bigfont.ca/rss/" title="RSS" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="6.18" cy="17.82" r="2.18"/><path d="M4 4.44v2.83c7.03 0 12.73 5.7 12.73 12.73h2.83c0-8.59-6.97-15.56-15.56-15.56zm0 5.66v2.83c3.9 0 7.07 3.17 7.07 7.07h2.83c0-5.47-4.43-9.9-9.9-9.9z"/></svg>
+</a>
+    </div>
+</nav>
+    </div>
+</header>
+
+
+<main id="site-main" class="site-main outer">
+    <div class="inner">
+
+        <article class="post-full post no-image">
+
+            <header class="post-full-header">
+                <section class="post-full-meta">
+                    <time class="post-full-meta-date" datetime="2018-05-24">24 May 2018</time>
+                </section>
+                <h1 class="post-full-title">ECMA Script Modules and Module Loading in the Browser</h1>
+            </header>
+
+
+            <section class="post-full-content">
+                <div class="post-content">
+                    <p>index.html</p>
+<pre><code> &lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;title&gt;Modules Demo&lt;/title&gt;
+    &lt;script 
+        src=&quot;https://code.jquery.com/jquery-3.3.1.min.js&quot; 
+        crossorigin=&quot;anonymous&quot;&gt;&lt;/script&gt;
+    &lt;script type=&quot;module&quot; src=&quot;index.js&quot;&gt;&lt;/script&gt;
+    &lt;script type=&quot;module&quot; src=&quot;logger.js&quot;&gt;&lt;/script&gt;
+    &lt;script type=&quot;module&quot; src=&quot;foo.js&quot;&gt;&lt;/script&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+  
+  &lt;/body&gt;
+&lt;/html&gt;
+
+</code></pre>
+<p>index.js</p>
+<pre><code>import foo from &quot;./foo.js&quot;
+import log from &quot;./logger.js&quot;;
+
+$(() =&gt; {
+    log(&quot;Hello from index.js&quot;);
+    foo.greetings();
+    foo.valediction();
+});
+</code></pre>
+<p>logger.js</p>
+<pre><code>export default (text) =&gt; {
+    $(&quot;body&quot;).append(`&lt;p&gt;${text}&lt;/p&gt;`);
+}
+</code></pre>
+<p>foo.js</p>
+<pre><code>import log from &quot;./logger.js&quot;;
+
+$(() =&gt; {
+    log(&quot;Hello from foo.js&quot;);
+});
+
+let greetings = () =&gt; log(&quot;Greetings from foo.js&quot;);
+
+export default {
+    greetings,
+    valediction: () =&gt; log(&quot;Goodbye from foo.js&quot;),
+};
+</code></pre>
+<p>Sources:</p>
+<ul>
+<li><a href="https://blog.whatwg.org/js-modules">https://blog.whatwg.org/js-modules</a></li>
+<li><a href="https://html.spec.whatwg.org/multipage/scripting.html#script-type-module-example-1">https://html.spec.whatwg.org/multipage/scripting.html#script-type-module-example-1</a></li>
+<li><a href="https://hacks.mozilla.org/2015/08/es6-in-depth-modules/">https://hacks.mozilla.org/2015/08/es6-in-depth-modules/</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export">https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export</a></li>
+</ul>
+
+                </div>
+            </section>
+
+
+            <footer class="post-full-footer">
+
+
+                    
+<section class="author-card">
+        <img class="author-profile-image" src="http://www.gravatar.com/avatar/a5f32a0e420e00997e87ee2e565a30bd?s=250&amp;d=mm&amp;r=x" alt="Shaun Luttin" />
+    <section class="author-card-content">
+        <h4 class="author-card-name"><a href="../author/shaun/index.html">Shaun Luttin</a></h4>
+            <p>Read <a href="../author/shaun/index.html">more posts</a> by this author.</p>
+    </section>
+</section>
+<div class="post-full-footer-right">
+    <a class="author-card-button" href="../author/shaun/index.html">Read More</a>
+</div>
+
+
+            </footer>
+
+
+        </article>
+
+    </div>
+</main>
+
+<aside class="read-next outer">
+    <div class="inner">
+        <div class="read-next-feed">
+
+                <article class="post-card post tag-c tag-concurrency tag-net tag-threading ">
+
+    <a class="post-card-image-link" href="../what-is-a-net-mutex/index.html">
+        <img class="post-card-image"
+            srcset="/content/images/size/w300/2018/05/lock-1.jpg 300w,
+                    /content/images/size/w600/2018/05/lock-1.jpg 600w,
+                    /content/images/size/w1000/2018/05/lock-1.jpg 1000w,
+                    /content/images/size/w2000/2018/05/lock-1.jpg 2000w"
+            sizes="(max-width: 1000px) 400px, 700px"
+            src="../content/images/2018/05/lock-1.jpg"
+            alt="What is a .NET Mutex?"
+        />
+    </a>
+
+    <div class="post-card-content">
+
+        <a class="post-card-content-link" href="../what-is-a-net-mutex/index.html">
+
+            <header class="post-card-header">
+                    <span class="post-card-tags">c#</span>
+                <h2 class="post-card-title">What is a .NET Mutex?</h2>
+            </header>
+
+            <section class="post-card-excerpt">
+                <p>https://msdn.microsoft.com/en-us/library/system.threading.mutex(v=vs.110).aspx  a primitive .NET type one thread owns it at a time WaitOne(int) blocks the calling thread returns true when</p>
+            </section>
+
+        </a>
+
+        <footer class="post-card-meta">
+
+            <ul class="author-list">
+                <li class="author-list-item">
+
+                    <div class="author-name-tooltip">
+                        Shaun Luttin
+                    </div>
+
+                        <a href="../author/shaun/index.html" class="static-avatar">
+                            <img class="author-profile-image" src="http://www.gravatar.com/avatar/a5f32a0e420e00997e87ee2e565a30bd?s=250&amp;d=mm&amp;r=x" alt="Shaun Luttin" />
+                        </a>
+                </li>
+            </ul>
+
+            <span class="reading-time">1 min read</span>
+
+        </footer>
+
+    </div>
+
+</article>
+
+                <article class="post-card post tag-programming tag-functional-programming tag-draft no-image">
+
+
+    <div class="post-card-content">
+
+        <a class="post-card-content-link" href="../functional-programming-notes/index.html">
+
+            <header class="post-card-header">
+                    <span class="post-card-tags">programming</span>
+                <h2 class="post-card-title">My Functional Programming Notes</h2>
+            </header>
+
+            <section class="post-card-excerpt">
+                <p>DRAFT  These are concise, early learning functional programming notes from these sources:  https://wiki.haskell.org/Typeclassopedia https://www.manning.com/books/concurrency-in-dotnet https://stackoverflow.com/a/4412319/1108891 talks about how C#</p>
+            </section>
+
+        </a>
+
+        <footer class="post-card-meta">
+
+            <ul class="author-list">
+                <li class="author-list-item">
+
+                    <div class="author-name-tooltip">
+                        Shaun Luttin
+                    </div>
+
+                        <a href="../author/shaun/index.html" class="static-avatar">
+                            <img class="author-profile-image" src="http://www.gravatar.com/avatar/a5f32a0e420e00997e87ee2e565a30bd?s=250&amp;d=mm&amp;r=x" alt="Shaun Luttin" />
+                        </a>
+                </li>
+            </ul>
+
+            <span class="reading-time">2 min read</span>
+
+        </footer>
+
+    </div>
+
+</article>
+
+        </div>
+    </div>
+</aside>
+
+<div class="floating-header">
+    <div class="floating-header-logo">
+        <a href="https://bigfont.ca/">
+            <span>BigFont Blog</span>
+        </a>
+    </div>
+    <span class="floating-header-divider">&mdash;</span>
+    <div class="floating-header-title">ECMA Script Modules and Module Loading in the Browser</div>
+    <div class="floating-header-share">
+        <div class="floating-header-share-label">Share this <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M7.5 15.5V4a1.5 1.5 0 1 1 3 0v4.5h2a1 1 0 0 1 1 1h2a1 1 0 0 1 1 1H18a1.5 1.5 0 0 1 1.5 1.5v3.099c0 .929-.13 1.854-.385 2.748L17.5 23.5h-9c-1.5-2-5.417-8.673-5.417-8.673a1.2 1.2 0 0 1 1.76-1.605L7.5 15.5zm6-6v2m-3-3.5v3.5m6-1v2"/>
+</svg>
+</div>
+        <a class="floating-header-share-tw" href="https://twitter.com/share?text=ECMA%20Script%20Modules%20and%20Module%20Loading%20in%20the%20Browser&amp;url=https://bigfont.ca/ecma-script-modules-in-the-browser/"
+            onclick="window.open(this.href, 'share-twitter', 'width=550,height=235');return false;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M30.063 7.313c-.813 1.125-1.75 2.125-2.875 2.938v.75c0 1.563-.188 3.125-.688 4.625a15.088 15.088 0 0 1-2.063 4.438c-.875 1.438-2 2.688-3.25 3.813a15.015 15.015 0 0 1-4.625 2.563c-1.813.688-3.75 1-5.75 1-3.25 0-6.188-.875-8.875-2.625.438.063.875.125 1.375.125 2.688 0 5.063-.875 7.188-2.5-1.25 0-2.375-.375-3.375-1.125s-1.688-1.688-2.063-2.875c.438.063.813.125 1.125.125.5 0 1-.063 1.5-.25-1.313-.25-2.438-.938-3.313-1.938a5.673 5.673 0 0 1-1.313-3.688v-.063c.813.438 1.688.688 2.625.688a5.228 5.228 0 0 1-1.875-2c-.5-.875-.688-1.813-.688-2.75 0-1.063.25-2.063.75-2.938 1.438 1.75 3.188 3.188 5.25 4.25s4.313 1.688 6.688 1.813a5.579 5.579 0 0 1 1.5-5.438c1.125-1.125 2.5-1.688 4.125-1.688s3.063.625 4.188 1.813a11.48 11.48 0 0 0 3.688-1.375c-.438 1.375-1.313 2.438-2.563 3.188 1.125-.125 2.188-.438 3.313-.875z"/></svg>
+        </a>
+        <a class="floating-header-share-fb" href="https://www.facebook.com/sharer/sharer.php?u=https://bigfont.ca/ecma-script-modules-in-the-browser/"
+            onclick="window.open(this.href, 'share-facebook','width=580,height=296');return false;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M19 6h5V0h-5c-3.86 0-7 3.14-7 7v3H8v6h4v16h6V16h5l1-6h-6V7c0-.542.458-1 1-1z"/></svg>
+        </a>
+    </div>
+    <progress id="reading-progress" class="progress" value="0">
+        <div class="progress-container">
+            <span class="progress-bar"></span>
+        </div>
+    </progress>
+</div>
+
+
+
+
+        <footer class="site-footer outer">
+            <div class="site-footer-content inner">
+                <section class="copyright"><a href="https://bigfont.ca/">BigFont Blog</a> &copy; 2022</section>
+                <nav class="site-footer-nav">
+                    <a href="https://bigfont.ca/">Latest Posts</a>
+                    
+                    
+                    <a href="https://ghost.org/" target="_blank" rel="noopener">Ghost</a>
+                </nav>
+            </div>
+        </footer>
+
+    </div>
+
+
+    <script>
+        var images = document.querySelectorAll('.kg-gallery-image img');
+        images.forEach(function (image) {
+            var container = image.closest('.kg-gallery-image');
+            var width = image.attributes.width.value;
+            var height = image.attributes.height.value;
+            var ratio = width / height;
+            container.style.flex = ratio + ' 1 0%';
+        })
+    </script>
+
+
+    <script
+        src="https://code.jquery.com/jquery-3.2.1.min.js"
+        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous">
+    </script>
+    <script type="text/javascript" src="../assets/built/jquery.fitvidsc03d.js?v=3e32194df1"></script>
+
+    <script src="../assets/built/infinitescrollc03d.js?v=3e32194df1"></script>
+
+    <script>
+
+// NOTE: Scroll performance is poor in Safari
+// - this appears to be due to the events firing much more slowly in Safari.
+//   Dropping the scroll event and using only a raf loop results in smoother
+//   scrolling but continuous processing even when not scrolling
+$(document).ready(function () {
+    // Start fitVids
+    var $postContent = $(".post-full-content");
+    $postContent.fitVids();
+    // End fitVids
+
+    var progressBar = document.querySelector('#reading-progress');
+    var header = document.querySelector('.floating-header');
+    var title = document.querySelector('.post-full-title');
+
+    var lastScrollY = window.scrollY;
+    var lastWindowHeight = window.innerHeight;
+    var lastDocumentHeight = $(document).height();
+    var ticking = false;
+
+    function onScroll() {
+        lastScrollY = window.scrollY;
+        requestTick();
+    }
+
+    function onResize() {
+        lastWindowHeight = window.innerHeight;
+        lastDocumentHeight = $(document).height();
+        requestTick();
+    }
+
+    function requestTick() {
+        if (!ticking) {
+            requestAnimationFrame(update);
+        }
+        ticking = true;
+    }
+
+    function update() {
+        var trigger = title.getBoundingClientRect().top + window.scrollY;
+        var triggerOffset = title.offsetHeight + 35;
+        var progressMax = lastDocumentHeight - lastWindowHeight;
+
+        // show/hide floating header
+        if (lastScrollY >= trigger + triggerOffset) {
+            header.classList.add('floating-active');
+        } else {
+            header.classList.remove('floating-active');
+        }
+
+        progressBar.setAttribute('max', progressMax);
+        progressBar.setAttribute('value', lastScrollY);
+
+        ticking = false;
+    }
+
+    window.addEventListener('scroll', onScroll, {passive: true});
+    window.addEventListener('resize', onResize, false);
+
+    update();
+
+});
+</script>
+
+
+    
+
+</body>
+
+<!-- Mirrored from bigfontblog.azurewebsites.net/ecma-script-modules-in-the-browser/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 09 Dec 2022 10:55:17 GMT -->
+</html>
