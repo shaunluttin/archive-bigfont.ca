@@ -103,13 +103,14 @@
       #site-main > div > div.post-feed > ul {
         list-style: none;
         padding: 0;
-        text-decoration: none;
-        border: none;
+      }
+      #site-main > div > div.post-feed > ul > li {
+        list-style: none;
+        padding: 0;
+        padding-bottom: 20px;
       }
       #site-main > div > div.post-feed > ul > li > a {
         text-decoration: none;
-        border-color: white;
-        outline-color: white;
         box-shadow: none;
       }
     </style>
@@ -145,22 +146,6 @@
                   <a href="work-bibliography/index.html">Bibliography (Work)</a>
                 </li>
               </ul>
-            </div>
-            <div class="site-nav-right">
-              <div class="social-links"></div>
-              <a
-                class="rss-button"
-                href="https://feedly.com/i/subscription/feed/https://bigfont.ca/rss/"
-                title="RSS"
-                target="_blank"
-                rel="noopener"
-                ><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                  <circle cx="6.18" cy="17.82" r="2.18" />
-                  <path
-                    d="M4 4.44v2.83c7.03 0 12.73 5.7 12.73 12.73h2.83c0-8.59-6.97-15.56-15.56-15.56zm0 5.66v2.83c3.9 0 7.07 3.17 7.07 7.07h2.83c0-5.47-4.43-9.9-9.9-9.9z"
-                  />
-                </svg>
-              </a>
             </div>
           </nav>
         </div>
@@ -891,6 +876,15 @@
                 >
               </li>
               <li>
+                <a
+                  href="a-short-guide-on-how-to-write-helpful-code-comments-written-by-someone-who-is-skeptical-of-the-value-of-code-comments"
+                  >Short guide on a code commenting style, written by someone
+                  who is skeptical of its value, is terrible at writing that
+                  style of code comments, and despite that, is willing to learn
+                  how to write them the way a team has elected to write them.</a
+                >
+              </li>
+              <li>
                 <a href="searching-with-git"
                   >Finding (searching for) things with Git</a
                 >
@@ -1165,15 +1159,6 @@
                 >
               </li>
               <li>
-                <a
-                  href="a-short-guide-on-how-to-write-helpful-code-comments-written-by-someone-who-is-skeptical-of-the-value-of-code-comments"
-                  >A short guide on a code commenting style, written by someone
-                  who is skeptical of its value, is terrible at writing that
-                  style of code comments, and despite that, is willing to learn
-                  how to write them the way a team has elected to write them.</a
-                >
-              </li>
-              <li>
                 <a href="using-graphical-user-interfaces-in-wsl2"
                   >Using Graphical User Interfaces in WSL2</a
                 >
@@ -1306,7 +1291,6 @@
                   >Windows 10 Setup First Steps</a
                 >
               </li>
-              <li><a href="work-bibliography">Work Related Bibliography</a></li>
             </ul>
           </div>
         </div>
